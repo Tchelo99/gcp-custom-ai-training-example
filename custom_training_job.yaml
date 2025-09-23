@@ -1,14 +1,12 @@
-display_name: "simple-ai-training-job"
-args:
-  - "--C=0.5"
-worker_pool_specs:
-  - machine_spec:
-      machine_type: "n1-standard-4"
-      accelerator_type: "ACCELERATOR_TYPE_UNSPECIFIED"
-      accelerator_count: 0
-    replica_count: 1
-    container_spec:
-      image_uri: "gcr.io/your-gcp-project-id/simple-ai-training:latest"
-      command:
-        - "python"
-        - "train.py"
+workerPoolSpecs:
+  - machineSpec:
+      machineType: n1-standard-4
+    replicaCount: 1
+    containerSpec:
+      imageUri: gcr.io/your-gcp-project-id/simple-ai-training:latest
+      args:
+        - --model-dir=$(AIP_MODEL_DIR)
+        - --data-path=gs://your-bucket/path/to/image/data
+        - --learning-rate=0.001
+        - --batch-size=32
+        - --epochs=10
