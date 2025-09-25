@@ -9,7 +9,11 @@ from model import SimpleCNN
 
 def train_model(args):
     """Trains a CNN model for image classification."""
-
+    
+    # Set device (GPU or CPU)
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    print(f"Using device: {device}")
+    
     # Define data transformations
     transform = transforms.Compose([
         transforms.Resize((224, 224)),
@@ -28,7 +32,7 @@ def train_model(args):
         return
 
     # Initialize the model, loss function, and optimizer
-    model = SimpleCNN()
+    model = SimpleCNN().to(device)
     criterion = nn.CrossEntropyLoss()
     optimizer = optim.Adam(model.parameters(), lr=args.learning_rate)
 
@@ -36,6 +40,9 @@ def train_model(args):
     for epoch in range(args.epochs):
         running_loss = 0.0
         for i, (inputs, labels) in enumerate(train_loader):
+            # Move data to the selected device
+            inputs, labels = inputs.to(device), labels.to(device)
+            
             optimizer.zero_grad()
             outputs = model(inputs)
             loss = criterion(outputs, labels)
