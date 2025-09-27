@@ -172,7 +172,7 @@ if __name__ == "__main__":
     parser.add_argument("--epochs", type=int, default=10, 
                        help="Number of training epochs.")
     parser.add_argument("--mlflow-tracking-uri", type=str, 
-                       default="http://localhost:5000",
+                       default="your_mlflow_tracking_uri",
                        help="MLflow tracking server URI.")
     parser.add_argument("--register-model", action="store_true",
                        help="Register the trained model in MLflow Model Registry.")
