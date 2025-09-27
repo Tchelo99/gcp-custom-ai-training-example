@@ -7,11 +7,11 @@ worker_pool_specs:
     containerSpec:
       imageUri: gcr.io/your-gcp-project-id/simple-ai-training:latest
       args:
-        - --model-dir=$(AIP_MODEL_DIR)
         - --data-path=gs://your-bucket/path/to/image/data
         - --learning-rate=0.001
         - --batch-size=32
         - --epochs=10
+        - --mlflow-tracking-uri="your_mlflow_tracking_uri"
 
 scheduling:
   restart_job_on_worker_restart: true
