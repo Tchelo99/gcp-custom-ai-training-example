@@ -10,7 +10,7 @@ COPY requirements.txt .
 # Avoid cache busting for dependencies (this line will cache)
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Now copy the rest of the app (this is what changes often)
+# Copy the rest of the app (this is what changes often)
 COPY . .
 
 # Prevent Python from buffering outputs
